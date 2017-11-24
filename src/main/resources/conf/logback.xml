@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <property name="logBase" value="/data/log/stock-presalesync-job" />
+    <property name="errorInfoLogBase" value="/var/log/errorinfo/stock-presalesync-job" />
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %logger[%L] [%level]  - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="general" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logBase}/log_info.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} - %msg%n </pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <appender name="appError" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${errorInfoLogBase}/appError.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${errorInfoLogBase}/appError.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%level] %C[%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="general" />
+    </appender>
+    <logger name="org.apache" level="ERROR" />
+    <logger name="org.springframework" level="ERROR" />
+    <logger name="application.error" level="info" additivity="false">
+        <appender-ref ref="appError" />
+    </logger>
+    <root level="info">
+        <appender-ref ref="stdout" />
+        <appender-ref ref="ASYNC" />
+    </root>
+</configuration>
