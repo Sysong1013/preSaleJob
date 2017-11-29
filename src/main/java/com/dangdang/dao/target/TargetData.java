@@ -19,7 +19,7 @@ public interface TargetData {
             "<foreach collection=\"sourceDataList\" item=\"item\" index=\"index\" separator=\",\">" +
             "(#{item.productId},#{item.warehouseId},#{item.preStockQuantity} ,-1," +
             "'API-ModifyProdStock','1002-Update PreStock',getdate()," +
-            "0,getdate(),1,1,#{item.preArrivalDate,jdbcType=DATE},0,0)" +
+            "0,getdate(),1,1,#{item.preArrivalDate,jdbcType=TIMESTAMP},0,0)" +
             "</foreach>" +
             "</script>")
     int insertPostStockQueue(@Param("sourceDataList") List<PreProductWarehouseStockModle> sourceDataList);
