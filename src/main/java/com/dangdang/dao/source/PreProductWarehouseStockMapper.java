@@ -10,7 +10,7 @@ import java.util.List;
  * Created by songyisong on 2017/11/21.
  */
 @Repository
-public interface SourceData {
+public interface PreProductWarehouseStockMapper {
     //从预售表查询是预售(warehouse_type=1)&&未同步至主表(update_status=0)&&到了预售开始时间(event_start_time<=now)&&是普通预售的数据(pre_stock_type=0)
     @Results({
             @Result(id = true, column = "product_id", property = "productId"),
@@ -23,7 +23,7 @@ public interface SourceData {
             " WHERE product_id%#{shardingTotalCount}=#{shardingItem} " +
             "AND warehouse_type=1 AND (pre_stock_type=0 OR pre_stock_type IS NULL)" +
             "AND (update_status=0 OR update_status IS NULL ) " +
-            "AND datediff(second,ISNULL(event_start_time,getdate()),getdate())>=0 ORDER BY last_changed_date DESC")
+            "AND datediff(second,ISNULL(event_start_time,getdate()),getdate())>=0 ORDER BY last_changed_date ASC")
     List<PreProductWarehouseStockModle> getPreProductWarehouseStock(@Param("shardingItem") int shardingItem,
                                                                     @Param("shardingTotalCount") int shardingTotalCount);
 

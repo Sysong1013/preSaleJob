@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by songyisong on 2017/11/21.
  */
-public interface TargetData {
+public interface PostStockQueueMapper {
 
     @Insert("<script>" +
             "INSERT INTO poststock_queue (productid,storeid,op_num,orderid," +
