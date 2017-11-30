@@ -15,13 +15,11 @@ public class PreProductWarehouseStockObj {
     @Resource
     private SourceData sourceData;
 
-    public List<PreProductWarehouseStockModle> getData(int shardingItem,int shardingTotalCount)
-    {
+    public List<PreProductWarehouseStockModle> getData(int shardingItem,int shardingTotalCount) {
         return sourceData.getPreProductWarehouseStock(shardingItem,shardingTotalCount);
     }
 
-    public int updateData(List<PreProductWarehouseStockModle> sourceDataList)
-    {
+    public int updateData(List<PreProductWarehouseStockModle> sourceDataList) {
         return sourceData.updatePreProductWarehouseStock(sourceDataList);
     }
 }

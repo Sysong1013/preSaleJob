@@ -14,8 +14,7 @@ import java.util.List;
 public class PostStockQueueObj {
     @Resource
     TargetData insertData;
-    public int syncDate(List<PreProductWarehouseStockModle> sourceDataList)
-    {
+    public int syncDate(List<PreProductWarehouseStockModle> sourceDataList) {
         return insertData.insertPostStockQueue(sourceDataList);
     }
 }
