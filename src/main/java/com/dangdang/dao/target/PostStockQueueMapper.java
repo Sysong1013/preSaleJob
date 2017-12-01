@@ -1,6 +1,6 @@
 package com.dangdang.dao.target;
 
-import com.dangdang.modle.PreProductWarehouseStockModle;
+import com.dangdang.modle.PreProductWarehouseStock;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,5 +22,5 @@ public interface PostStockQueueMapper {
             "0,getdate(),1,1,#{item.preArrivalDate,jdbcType=TIMESTAMP},0,0)" +
             "</foreach>" +
             "</script>")
-    int insertPostStockQueue(@Param("sourceDataList") List<PreProductWarehouseStockModle> sourceDataList);
+    int insertPostStockQueue(@Param("sourceDataList") List<PreProductWarehouseStock> sourceDataList);
 }

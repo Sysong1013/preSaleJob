@@ -38,6 +38,7 @@
         <appender-ref ref="general" />
     </appender>
     <logger name="org.apache" level="ERROR" />
+    <!--<logger name="java.sql" level="TRACE" />-->
     <logger name="org.springframework" level="ERROR" />
     <logger name="application.error" level="info" additivity="false">
         <appender-ref ref="appError" />

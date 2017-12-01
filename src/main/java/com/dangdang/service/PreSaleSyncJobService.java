@@ -2,7 +2,7 @@ package com.dangdang.service;
 
 import com.dangdang.dao.source.PreProductWarehouseStockMapper;
 import com.dangdang.dao.target.PostStockQueueMapper;
-import com.dangdang.modle.PreProductWarehouseStockModle;
+import com.dangdang.modle.PreProductWarehouseStock;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class PreSaleSyncJobService {
         try {
             Long startTime = System.currentTimeMillis();
             //从预售表获取待同步数据
-            List<PreProductWarehouseStockModle> sourceDataList = preProductWarehouseStockMapper.getPreProductWarehouseStock(shardingItem, shardingTotalCount);
+            List<PreProductWarehouseStock> sourceDataList = preProductWarehouseStockMapper.getPreProductWarehouseStock(shardingItem, shardingTotalCount);
             if (sourceDataList == null) {
                 errorlog.error("Receive An Exception During Query pre_product_wahouse_stock On ShardingItem {}", shardingItem);
                 return;
