@@ -18,7 +18,7 @@ public interface PreProductWarehouseStockMapper {
             @Result(column = "pre_stock_quantity", property = "preStockQuantity"),
             @Result(column = "pre_arrival_date", property = "preArrivalDate")
     })
-    @Select("SELECT top 1000 product_id,warehouse_id,pre_stock_quantity,pre_arrival_date " +
+    @Select("SELECT top 500 product_id,warehouse_id,pre_stock_quantity,pre_arrival_date " +
             "FROM pre_product_warehouse_stock" +
             " WHERE product_id%#{shardingTotalCount}=#{shardingItem} " +
             "AND warehouse_type=1 AND (pre_stock_type=0 OR pre_stock_type IS NULL)" +
