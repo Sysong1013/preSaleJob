@@ -20,12 +20,13 @@ public class PreSaleSyncJob implements SimpleJob {
 
     public void execute(ShardingContext shardingContext) {
         try {
-            log.info("****PreSaleSyncJob Delaing Data! On ShardingItem:{}", shardingContext.getShardingItem());
-            preSaleSyncJobService.syncData(shardingContext.getShardingItem(), shardingContext.getShardingTotalCount());
+            while (true){
+                log.info("****PreSaleSyncJob Delaing Data! On ShardingItem:{}", shardingContext.getShardingItem());
+                preSaleSyncJobService.syncData(shardingContext.getShardingItem(), shardingContext.getShardingTotalCount());
+            }
         } catch (Exception e) {
             errorlog.error("****PreSaleSyncJob Dealing Data Receive An Exception On ShardingItem:{}", shardingContext.getShardingItem(),e);
 
         }
-
     }
 }
