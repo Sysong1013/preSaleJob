@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by songyisong on 2017/11/21.
@@ -23,19 +24,25 @@ public class PreSaleSyncJobService {
     @Resource
     private PostStockQueueMapper postStockQueueMapper;
 
-    public void syncData(int shardingItem, int shardingTotalCount) {
+    public List<PreProductWarehouseStock> getData(int shardingItem, int shardingTotalCount) {
+        //从预售表获取待同步数据
         try {
-            Long startTime = System.currentTimeMillis();
-            //从预售表获取待同步数据
             List<PreProductWarehouseStock> sourceDataList = preProductWarehouseStockMapper.getPreProductWarehouseStock(shardingItem, shardingTotalCount);
-            if (sourceDataList == null) {
-                errorlog.error("Receive An Exception During Query pre_product_wahouse_stock On ShardingItem {}", shardingItem);
-                return;
-            } else if (sourceDataList.size() == 0) {
+            if (sourceDataList.size() == 0) {
                 log.info("No Data To Sync On ShardingItem {}", shardingItem);
-                return;
+                return sourceDataList;
             }
             log.info("Get {} PerSaleDatas To Sync On ShardingItem {}", sourceDataList.size(), shardingItem);
+            return sourceDataList;
+        }catch (Exception e){
+            errorlog.error("query data receive an exception e:",e);
+            return null;
+        }
+    }
+
+    public void dealData(int shardingItem, List<PreProductWarehouseStock> sourceDataList) {
+        try {
+            Long startTime = System.currentTimeMillis();
             //将数据插入poststock_queue，库存同步作业会同步至主表，预售生效
             int insertResult = postStockQueueMapper.insertPostStockQueue(sourceDataList);
             if (insertResult != sourceDataList.size()) {
@@ -47,7 +54,7 @@ public class PreSaleSyncJobService {
             log.info("{} datas to sync ,success sync {} datas , used {}ms",
                     sourceDataList.size(), insertResult, endTime - startTime);
         } catch (Exception e) {
-            errorlog.error("Receive An Exception On ShardingItem {} :",shardingItem,e);
+            errorlog.error("Receive An Exception On ShardingItem {} :", shardingItem, e);
         }
     }
 }

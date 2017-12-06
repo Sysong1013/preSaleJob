@@ -23,7 +23,7 @@ public interface PreProductWarehouseStockMapper {
             " WHERE product_id%#{shardingTotalCount}=#{shardingItem} " +
             "AND warehouse_type=1 AND (pre_stock_type=0 OR pre_stock_type IS NULL)" +
             "AND (update_status=0 OR update_status IS NULL ) " +
-            "AND datediff(second,ISNULL(event_start_time,getdate()),getdate())>=0 ORDER BY last_changed_date ASC")
+            "AND datediff(ms,ISNULL(event_start_time,getdate()),getdate())>=0 ORDER BY last_changed_date ASC")
     List<PreProductWarehouseStock> getPreProductWarehouseStock(@Param("shardingItem") int shardingItem,
                                                                @Param("shardingTotalCount") int shardingTotalCount);
 

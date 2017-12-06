@@ -18,9 +18,10 @@
                    base-sleep-time-milliseconds="${baseSleepTimeMilliseconds}"
                    max-sleep-time-milliseconds="${maxSleepTimeMilliseconds}" max-retries="${maxRetries}"/>
 
-    <job:simple id="${job.id}" class="${job.class}"
+    <job:dataflow id="${job.id}" class="${job.class}"
                 registry-center-ref="regCenter" sharding-total-count="${job.shardingTotalCount}"
                 cron="${job.cron}" monitor-execution="${job.monitorExecution}"
+                streaming-process="${job.streamingProcess}"
                 failover="${job.failover}" overwrite="${job.overwrite}"
                 disabled="${job.disabled}" description="${job.description}"/>
 </beans>
