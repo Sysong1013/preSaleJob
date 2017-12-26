@@ -1,8 +1,8 @@
-package com.dangdang.service;
+package com.dangdang.stock.service;
 
-import com.dangdang.dao.source.PreProductWarehouseStockMapper;
-import com.dangdang.dao.target.PostStockQueueMapper;
-import com.dangdang.modle.PreProductWarehouseStock;
+import com.dangdang.stock.dao.source.PreProductWarehouseStockMapper;
+import com.dangdang.stock.dao.target.PostStockQueueMapper;
+import com.dangdang.stock.modle.PreProductWarehouseStock;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

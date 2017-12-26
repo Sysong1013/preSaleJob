@@ -20,7 +20,7 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.dangdang.dao.source" />
+        <property name="basePackage" value="com.dangdang.stock.dao.source" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -44,7 +44,7 @@
         <property name="dataSource" ref="dataSource2" />
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.dangdang.dao.target" />
+        <property name="basePackage" value="com.dangdang.stock.dao.target" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory2" />
     </bean>
     <bean id="txManager2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

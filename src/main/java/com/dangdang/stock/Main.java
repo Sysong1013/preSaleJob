@@ -1,4 +1,4 @@
-package com.dangdang;
+package com.dangdang.stock;
 
 import com.dangdang.ddframe.container.spring.SpringContainer;
 

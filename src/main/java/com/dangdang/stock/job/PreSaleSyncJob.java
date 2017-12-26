@@ -1,10 +1,10 @@
-package com.dangdang.job;
+package com.dangdang.stock.job;
 
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.dataflow.DataflowJob;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
-import com.dangdang.modle.PreProductWarehouseStock;
-import com.dangdang.service.PreSaleSyncJobService;
+import com.dangdang.stock.modle.PreProductWarehouseStock;
+import com.dangdang.stock.service.PreSaleSyncJobService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.dangdang.modle;
+package com.dangdang.stock.modle;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
-package com.dangdang.dao.target;
+package com.dangdang.stock.dao.target;
 
-import com.dangdang.modle.PreProductWarehouseStock;
+import com.dangdang.stock.modle.PreProductWarehouseStock;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,6 +1,6 @@
-package com.dangdang.dao.source;
+package com.dangdang.stock.dao.source;
 
-import com.dangdang.modle.PreProductWarehouseStock;
+import com.dangdang.stock.modle.PreProductWarehouseStock;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
