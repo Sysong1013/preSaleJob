@@ -3,6 +3,7 @@ package com.dangdang.stock.service;
 import com.dangdang.stock.dao.source.PreProductWarehouseStockMapper;
 import com.dangdang.stock.dao.target.PostStockQueueMapper;
 import com.dangdang.stock.modle.PreProductWarehouseStock;
+import com.dangdang.stock.mq.EventProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,8 @@ public class PreSaleSyncJobService {
     private PreProductWarehouseStockMapper preProductWarehouseStockMapper;
     @Resource
     private PostStockQueueMapper postStockQueueMapper;
+    @Resource
+    EventProducer eventProducer;
 
     public List<PreProductWarehouseStock> getData(int shardingItem, int shardingTotalCount) {
         //从预售表获取待同步数据
@@ -45,6 +48,7 @@ public class PreSaleSyncJobService {
             Long startTime = System.currentTimeMillis();
             //将数据插入poststock_queue，库存同步作业会同步至主表，预售生效
             int insertResult = postStockQueueMapper.insertPostStockQueue(sourceDataList);
+            eventProducer.sendMes(sourceDataList);
             if (insertResult != sourceDataList.size()) {
                 errorlog.error("Sql Exception :{} Datas Sync Failed! On ShardingItem {}", sourceDataList.size() - insertResult, shardingItem);
             }

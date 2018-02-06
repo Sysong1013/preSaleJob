@@ -33,11 +33,30 @@
             <pattern>%d{HH:mm:ss.SSS} [%level] %C[%L] - %msg%n</pattern>
         </encoder>
     </appender>
+
+    <appender name="sendMes" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logBase}/message_info.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} - %msg%n </pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
     <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
         <includeCallerData>true</includeCallerData>
         <appender-ref ref="general" />
     </appender>
     <logger name="org.apache" level="ERROR" />
+    <logger name="sendMes" level="info" additivity="false">
+        <appender-ref ref="sendMes" />
+    </logger>
     <!--<logger name="java.sql" level="TRACE" />-->
     <logger name="org.springframework" level="ERROR" />
     <logger name="application.error" level="info" additivity="false">
