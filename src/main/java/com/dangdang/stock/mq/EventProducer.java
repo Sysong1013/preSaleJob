@@ -30,8 +30,10 @@ public class EventProducer {
     private String nameServer;
     @Value("${topic}")
     private String topic;
+    @Value("${tag}")
+    private String tag;
     private DefaultMQProducer producer;
-
+    //静态-非静态-构造器-@Value-@PostConstruct
     @PostConstruct
     public void start() {
         try {
@@ -50,7 +52,7 @@ public class EventProducer {
             ObjectMapper mapper = new ObjectMapper();
             String jsonMes = mapper.writeValueAsString(new PreStartMes(productId, warehouseId));//类转json
             try {
-                Message message = new Message(topic, "pre-start", (jsonMes).getBytes(RemotingHelper.DEFAULT_CHARSET));
+                Message message = new Message(topic, tag, (jsonMes).getBytes(RemotingHelper.DEFAULT_CHARSET));
                 String key = String.valueOf(productId) + "_" + String.valueOf(warehouseId);//消息的key设置为品+仓
                 message.setKeys(key);
                 SendResult sendResult = null;
