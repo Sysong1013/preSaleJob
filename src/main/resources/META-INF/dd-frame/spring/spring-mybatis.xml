@@ -15,6 +15,8 @@
         <property name="initialSize" value="${sourcetable.initial.size}"/>
         <property name="minIdle" value="${sourcetable.min.idle}" />
         <property name="maxWait" value="${sourcetable.max.wait}" />
+        <property name="validationQuery" value="SELECT 1" />
+
     </bean>
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
@@ -39,6 +41,7 @@
         <property name="initialSize" value="${targettable.initial.size}"/>
         <property name="minIdle" value="${targettable.min.idle}" />
         <property name="maxWait" value="${targettable.max.wait}" />
+        <property name="validationQuery" value="SELECT 1" />
     </bean>
     <bean id="sqlSessionFactory2" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource2" />
